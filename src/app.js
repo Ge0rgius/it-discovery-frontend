@@ -1,4 +1,6 @@
 'use strict';
+import {getInputValue, updateHTML} from "./utils";
+
 class Book {
 
     constructor(title, author, publisher, pages, year) {
@@ -53,18 +55,6 @@ class User {
 
 class Order {
 
-}
-
-function getInputValue(elementId) {
-
-    const inputElement = document.getElementById(elementId);
-    return inputElement.value;
-}
-
-function updateHTML(elementId, value) {
-
-    const inputElement = document.getElementById(elementId);
-    inputElement.innerHTML = value;
 }
 
 document.getElementById('addBook').addEventListener('click', () => {
