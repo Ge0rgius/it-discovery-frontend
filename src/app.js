@@ -1,3 +1,4 @@
+'use strict';
 class Book {
 
     constructor(title, author, publisher, pages, year) {
@@ -10,21 +11,34 @@ class Book {
 
 }
 
-const books = [];
+class BookStorage {
+    static #instance;
 
-function addBook(title, author, publisher, pages, year) {
-    const book = new Book(title, author, publisher, pages, year);
-    books.push(book);
-}
+    books = [];
 
-function displayBooks() {
-    let text = '';
-    for(let book of books) {
-        text += `title:${book.title}, author: ${book.author}`;
+    static {
+        this.#instance = new BookStorage();
     }
-    updateHTML('bookList', text);
+
+    static getInstance() {
+        return this.#instance;
+    }
+
+    addBook(title, author, publisher, pages, year) {
+        const book = new Book(title, author, publisher, pages, year);
+        this.books.push(book);
+    }
+
+    displayBooks() {
+        let text = '';
+        for(let book of this.books) {
+            text += `title:${book.title}, author: ${book.author}`;
+        }
+        updateHTML('bookList', text);
+    }
 }
 
+//TODO for homework
 class Author {
 
 }
@@ -60,8 +74,8 @@ document.getElementById('addBook').addEventListener('click', () => {
     const pages = getInputValue('inputPages');
     const year = getInputValue('inputYear');
 
-    addBook(title, author, publisher, pages, year);
-    displayBooks();
+    BookStorage.getInstance().addBook(title, author, publisher, pages, year);
+    BookStorage.getInstance().displayBooks();
 });
 
 
