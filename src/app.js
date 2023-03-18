@@ -1,5 +1,5 @@
 'use strict';
-import {getInputValue, updateHTML} from "./utils";
+import {getInputValue, updateHTML} from "./utils.js";
 
 class Book {
 
