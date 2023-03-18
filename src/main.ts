@@ -2,23 +2,12 @@
 //import {getInputValue, updateHTML} from "./utils.js";
 
 class Book {
+    constructor(private title: string, private author: string, private publisher: string, private pages: number,
+                private year: number) {
+    }
 
-    title: any;
-
-    author: any;
-
-    publisher: any;
-
-    pages: number;
-
-    year: number;
-
-    constructor(title: string, author: string, publisher: string, pages: number, year: number) {
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.pages = pages;
-        this.year = year;
+    public getGeneralInformation(): string {
+        return `title:${this.title}, author: ${this.author}`;
     }
 
 }
@@ -26,29 +15,30 @@ class Book {
 class BookStorage {
     static #instance: BookStorage;
 
-    books: Book[] = [];
+    private readonly books: Book[] = [];
 
     static {
         this.#instance = new BookStorage();
     }
 
-    static getInstance() {
+    public static getInstance() {
         return this.#instance;
     }
 
-    addBook(title: string, author: string, publisher: string, pages: number, year: number): void {
+    public addBook(title: string, author: string, publisher: string, pages: number, year: number): void {
         const book = new Book(title, author, publisher, pages, year);
         this.books.push(book);
     }
 
-    displayBooks(): void {
+    public displayBooks(): void {
         let text = '';
         for(let book of this.books) {
-            text += `title:${book.title}, author: ${book.author}`;
+            text += book.getGeneralInformation();
         }
         updateHTML('bookList', text);
     }
 }
+
 
 //TODO for homework
 class Author {
