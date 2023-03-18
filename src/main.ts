@@ -24,18 +24,16 @@ class Book {
 }
 
 class BookStorage {
-    //static #instance;
+    static #instance: BookStorage;
 
-    static instance;
-
-    books = [];
+    books: Book[] = [];
 
     static {
-        this.instance = new BookStorage();
+        this.#instance = new BookStorage();
     }
 
     static getInstance() {
-        return this.instance;
+        return this.#instance;
     }
 
     addBook(title: string, author: string, publisher: string, pages: number, year: number): void {
@@ -69,7 +67,7 @@ class Order {
 
 }
 
-document.getElementById('addBook').addEventListener('click', () => {
+document.getElementById('addBook')?.addEventListener('click', () => {
     const title = getInputValue('inputTitle') as string;
     const author = <string>getInputValue('inputAuthor');
     const publisher = getInputValue('inputPublisher') as string;
@@ -89,8 +87,10 @@ function getInputValue(elementId: string): string {
 
  function updateHTML(elementId: string, value: string): void {
 
-    const inputElement: HTMLElement = document.getElementById(elementId);
-    inputElement.innerHTML = value;
+    const inputElement: HTMLElement | null = document.getElementById(elementId);
+    if(inputElement) {
+        inputElement.innerHTML = value;
+    }
 }
 
 
