@@ -25,6 +25,7 @@ class Book {
 
 class BookStorage {
     //static #instance;
+
     static instance;
 
     books = [];
